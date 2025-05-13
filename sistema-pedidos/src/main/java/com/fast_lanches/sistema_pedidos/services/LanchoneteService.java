@@ -3,10 +3,12 @@ package com.fast_lanches.sistema_pedidos.services;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.fast_lanches.sistema_pedidos.dto.LanchoneteDTO;
+import com.fast_lanches.sistema_pedidos.dto.LanchoneteRequestDTO;
+import com.fast_lanches.sistema_pedidos.dto.LanchoneteResponseDTO;
 import com.fast_lanches.sistema_pedidos.model.Lanchonete;
 import com.fast_lanches.sistema_pedidos.model.Usuario;
 import com.fast_lanches.sistema_pedidos.repository.LanchoneteRepository;
@@ -21,7 +23,10 @@ public class LanchoneteService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    public LanchoneteDTO criarLanchonete(LanchoneteDTO lanchoneteDto){
+    @Autowired
+    private ModelMapper modelMapper;
+
+    public LanchoneteResponseDTO criarLanchonete(LanchoneteRequestDTO lanchoneteDto){
         Usuario usuario = usuarioRepository.findById(lanchoneteDto.getUsuarioId()).orElseThrow(() -> new RuntimeException("Usuario nao encontrado"));
 
         Lanchonete lanchonete = new Lanchonete();
@@ -30,16 +35,16 @@ public class LanchoneteService {
         lanchonete.setDataDeCriacao(lanchoneteDto.getDataDeCriacao());
         lanchonete.setUsuario(usuario);
 
-        lanchonenteRepository.save(lanchonete);
+        Lanchonete lanchoneteSalva = lanchonenteRepository.save(lanchonete);
 
-        return lanchoneteDto;
+        return modelMapper.map(lanchoneteSalva, LanchoneteResponseDTO.class);
     }
 
-    public List<LanchoneteDTO> listarLanchonetes(){
+    public List<LanchoneteResponseDTO> listarLanchonetes(){
         List<Lanchonete> lanchonetes = lanchonenteRepository.findAll();
 
         return lanchonetes.stream()
-        .map(lanchonete -> new LanchoneteDTO(lanchonete.getId(),lanchonete.getNome(), lanchonete.getDescricao(), lanchonete.getDataDeCriacao(), lanchonete.getUsuario().getId()))
-        .collect(Collectors.toList());
+            .map(lanchonete -> modelMapper.map(lanchonete, LanchoneteResponseDTO.class))
+            .collect(Collectors.toList());
     } 
 }

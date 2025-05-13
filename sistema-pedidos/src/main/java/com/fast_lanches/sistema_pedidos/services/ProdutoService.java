@@ -1,11 +1,14 @@
 package com.fast_lanches.sistema_pedidos.services;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.fast_lanches.sistema_pedidos.dto.ProdutoDTO;
+import com.fast_lanches.sistema_pedidos.dto.ProdutoRequestDTO;
+import com.fast_lanches.sistema_pedidos.dto.ProdutoResponseDTO;
 import com.fast_lanches.sistema_pedidos.model.Lanchonete;
 import com.fast_lanches.sistema_pedidos.model.Produto;
 import com.fast_lanches.sistema_pedidos.repository.LanchoneteRepository;
@@ -20,29 +23,41 @@ public class ProdutoService {
     @Autowired
     private LanchoneteRepository lanchonenteRepository;
 
-    public Produto criaProduto(ProdutoDTO produtoDto){
+    @Autowired
+    private ModelMapper modelMapper;
+
+    public ProdutoResponseDTO criaProduto(ProdutoRequestDTO produtoDto){
         
         Lanchonete lanchonete = lanchonenteRepository.findById(produtoDto.getLanchonenteId()).orElseThrow(() -> new RuntimeException("Lanchonete não encontrada!")); 
         
         Produto produto = new Produto();
-        produto.setNome(produtoDto.getName());
+        produto.setNome(produtoDto.getNome());
         produto.setImagem(produtoDto.getImagem());
         produto.setPreco(produtoDto.getPreco());
         produto.setDescricao(produtoDto.getDescricao());
         produto.setLanchonete(lanchonete);
 
-        return produtoRepository.save(produto);
+        Produto produtoSalvo = produtoRepository.save(produto);
+
+        return modelMapper.map(produtoSalvo, ProdutoResponseDTO.class);
     }
 
-    public List<Produto> listarProdutos(){
-        return produtoRepository.findAll();
+    public List<ProdutoResponseDTO> listarProdutos(){
+        List<Produto> produtos = produtoRepository.findAll();
+        return produtos.stream()
+            .map(produto -> modelMapper.map(produto, ProdutoResponseDTO.class))
+            .collect(Collectors.toList());
     }
 
-    public Produto buscarProduto(Long id){
-        return produtoRepository.findById(id).orElseThrow(() -> new RuntimeException("Produto não encontrado!"));
+    public ProdutoResponseDTO buscarProduto(Long id){
+        Produto produto = produtoRepository.findById(id).orElseThrow(() -> new RuntimeException("Produto não encontrado!"));
+        return modelMapper.map(produto, ProdutoResponseDTO.class);
     }
 
     public void excluirProduto(Long id){
+        if(!produtoRepository.existsById(id)){
+            throw new RuntimeException("Produto não existe!");
+        }
         produtoRepository.deleteById(id);
     }
 }

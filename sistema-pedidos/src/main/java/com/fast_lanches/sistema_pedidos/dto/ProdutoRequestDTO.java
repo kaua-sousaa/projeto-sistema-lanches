@@ -1,13 +1,17 @@
 package com.fast_lanches.sistema_pedidos.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class ProdutoDTO {
+@AllArgsConstructor
+@NoArgsConstructor
+public class ProdutoRequestDTO {
     private long id;
-    private String name;
+    private String nome;
     private String imagem;
     private double preco;
     private String descricao;

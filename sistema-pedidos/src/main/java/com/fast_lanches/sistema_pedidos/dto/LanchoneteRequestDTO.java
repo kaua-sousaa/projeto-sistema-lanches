@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class LanchoneteDTO {
+public class LanchoneteRequestDTO {
     private long id;
     private String nome;
     private String descricao;

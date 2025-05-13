@@ -1,18 +1,20 @@
 package com.fast_lanches.sistema_pedidos.dto;
 
 import java.time.LocalDate;
-
 import com.fast_lanches.sistema_pedidos.enums.TipoUsuario;
-
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class UsuarioDTO {
+@AllArgsConstructor
+@NoArgsConstructor
+public class UsuarioResponseDTO {
+    private long id;
     private String nome;
     private String email;
-    private String senha;
-    private LocalDate dataDeNascimento;
+    private LocalDate dataNascimento;
     private TipoUsuario tipo; 
 }
