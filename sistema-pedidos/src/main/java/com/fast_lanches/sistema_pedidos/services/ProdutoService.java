@@ -14,6 +14,8 @@ import com.fast_lanches.sistema_pedidos.model.Produto;
 import com.fast_lanches.sistema_pedidos.repository.LanchoneteRepository;
 import com.fast_lanches.sistema_pedidos.repository.ProdutoRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class ProdutoService {
     
@@ -26,6 +28,7 @@ public class ProdutoService {
     @Autowired
     private ModelMapper modelMapper;
 
+    @Transactional
     public ProdutoResponseDTO criaProduto(ProdutoRequestDTO produtoDto){
         
         Lanchonete lanchonete = lanchonenteRepository.findById(produtoDto.getLanchonenteId()).orElseThrow(() -> new RuntimeException("Lanchonete não encontrada!")); 
@@ -54,10 +57,32 @@ public class ProdutoService {
         return modelMapper.map(produto, ProdutoResponseDTO.class);
     }
 
+    @Transactional
     public void excluirProduto(Long id){
         if(!produtoRepository.existsById(id)){
             throw new RuntimeException("Produto não existe!");
         }
         produtoRepository.deleteById(id);
+    }
+
+    @Transactional
+    public ProdutoResponseDTO editarProduto(Long id, ProdutoRequestDTO produtoRequestDTO){
+        Produto produtoEditar = produtoRepository.findById(id).orElseThrow(() -> new RuntimeException("Produto não encontrado!"));
+
+        if (produtoRequestDTO.getNome() != null){
+            produtoEditar.setNome(produtoRequestDTO.getNome());
+        }
+        if (produtoRequestDTO.getDescricao() != null){
+            produtoEditar.setDescricao(produtoRequestDTO.getDescricao());
+        }
+        if (produtoRequestDTO.getImagem() != null){
+            produtoEditar.setImagem(produtoRequestDTO.getImagem());
+        }
+        if (produtoRequestDTO.getPreco() != null){
+            produtoEditar.setPreco(produtoRequestDTO.getPreco());
+        }
+
+        Produto produtoEditado = produtoRepository.save(produtoEditar);
+        return modelMapper.map(produtoEditado, ProdutoResponseDTO.class);
     }
 }

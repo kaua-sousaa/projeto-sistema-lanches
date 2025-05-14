@@ -30,7 +30,6 @@ public class UsuarioService {
             throw new RuntimeException("Email já cadastrado");
         }
 
-
         Usuario usuario = new Usuario();
         usuario.setNome(usuarioDto.getNome());
         usuario.setEmail(usuarioDto.getEmail());
@@ -41,6 +40,32 @@ public class UsuarioService {
         Usuario usuarioSalvo = usuarioRepository.save(usuario);
 
         return modelMapper.map(usuarioSalvo, UsuarioResponseDTO.class);
+    }
+
+    @Transactional
+    public void excluirUsuario(Long id){
+        if (!usuarioRepository.existsById(id)){
+            throw new RuntimeException("Usuario nao existe!");
+        }
+        usuarioRepository.deleteById(id);
+    }
+
+    @Transactional
+    public UsuarioResponseDTO editarUsuario(long id, UsuarioRequestDTO usuarioRequestDTO){
+        Usuario usuarioEditar = usuarioRepository.findById(id).orElseThrow(() -> new RuntimeException("Usuario nao encontrado!"));
+    
+        if (usuarioRequestDTO.getNome() != null) {
+            usuarioEditar.setNome(usuarioRequestDTO.getNome());
+        }
+        if (usuarioRequestDTO.getDataNascimento() != null) {
+            usuarioEditar.setDataNascimento(usuarioRequestDTO.getDataNascimento());
+        }
+        if (usuarioRequestDTO.getTipo() != null) {
+            usuarioEditar.setTipo(usuarioRequestDTO.getTipo());
+        }
+
+        Usuario usuarioEditado = usuarioRepository.save(usuarioEditar);
+        return modelMapper.map(usuarioEditado, UsuarioResponseDTO.class);
     }
 
     public List<UsuarioResponseDTO> listarUsuarios(){

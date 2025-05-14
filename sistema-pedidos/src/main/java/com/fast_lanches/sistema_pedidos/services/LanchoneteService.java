@@ -14,6 +14,8 @@ import com.fast_lanches.sistema_pedidos.model.Usuario;
 import com.fast_lanches.sistema_pedidos.repository.LanchoneteRepository;
 import com.fast_lanches.sistema_pedidos.repository.UsuarioRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class LanchoneteService {
     
@@ -26,6 +28,7 @@ public class LanchoneteService {
     @Autowired
     private ModelMapper modelMapper;
 
+    @Transactional
     public LanchoneteResponseDTO criarLanchonete(LanchoneteRequestDTO lanchoneteDto){
         Usuario usuario = usuarioRepository.findById(lanchoneteDto.getUsuarioId()).orElseThrow(() -> new RuntimeException("Usuario nao encontrado"));
 

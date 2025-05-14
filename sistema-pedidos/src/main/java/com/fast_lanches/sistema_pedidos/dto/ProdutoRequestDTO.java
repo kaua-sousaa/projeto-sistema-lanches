@@ -13,7 +13,7 @@ public class ProdutoRequestDTO {
     private long id;
     private String nome;
     private String imagem;
-    private double preco;
+    private Double preco;
     private String descricao;
     private long lanchonenteId;
 }

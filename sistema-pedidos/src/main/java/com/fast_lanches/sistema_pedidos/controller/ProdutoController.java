@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,7 +30,7 @@ public class ProdutoController {
         return ResponseEntity.status(201).body(produtoDTOcriado);
     }
 
-    @PostMapping("/excluirProduto/{id}")
+    @DeleteMapping("/excluirProduto/{id}")
     public ResponseEntity<Void> excluirProduto(@PathVariable long id){
         produtoService.excluirProduto(id);
         return ResponseEntity.noContent().build();
@@ -43,6 +45,12 @@ public class ProdutoController {
     @GetMapping("/buscarPorId/{id}")
     public ResponseEntity<ProdutoResponseDTO> buscarProdutos(@PathVariable long id){
         ProdutoResponseDTO produtoResponseDTO = produtoService.buscarProduto(id);
+        return ResponseEntity.ok(produtoResponseDTO);
+    }
+
+    @PutMapping("/editarProduto/{id}")
+    public ResponseEntity<ProdutoResponseDTO> editarProduto(@PathVariable long id, @RequestBody ProdutoRequestDTO produtoRequestDTO){
+        ProdutoResponseDTO produtoResponseDTO = produtoService.editarProduto(id, produtoRequestDTO);
         return ResponseEntity.ok(produtoResponseDTO);
     }
 }
