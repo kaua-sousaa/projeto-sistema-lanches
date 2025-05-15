@@ -1,5 +1,7 @@
 package com.fast_lanches.sistema_pedidos.dto;
 
+import java.math.BigDecimal;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +15,7 @@ public class ProdutoRequestDTO {
     private long id;
     private String nome;
     private String imagem;
-    private Double preco;
+    private BigDecimal preco;
     private String descricao;
     private long lanchonenteId;
 }

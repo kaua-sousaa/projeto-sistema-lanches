@@ -1,5 +1,6 @@
 package com.fast_lanches.sistema_pedidos.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +55,9 @@ public class Pedido {
     @ManyToOne
     @JoinColumn(name = "lanchonete_id", nullable = false)
     private Lanchonete lanchonete;
+
+    @Column(nullable = false)
+    private BigDecimal valorTotal;
 
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItemPedido> itensPedido = new ArrayList<>();

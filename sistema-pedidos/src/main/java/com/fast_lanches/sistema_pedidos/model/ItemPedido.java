@@ -1,5 +1,7 @@
 package com.fast_lanches.sistema_pedidos.model;
 
+import java.math.BigDecimal;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -35,9 +37,6 @@ public class ItemPedido {
     private Integer quantidade;
 
     @Column(nullable = false)
-    private Double precoUnitario;
+    private BigDecimal precoUnitario;
 
-    public Double valorTotal(){
-        return precoUnitario * quantidade;
-    }
 }

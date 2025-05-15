@@ -1,5 +1,7 @@
 package com.fast_lanches.sistema_pedidos.model;
 
+import java.math.BigDecimal;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -30,7 +32,7 @@ public class Produto {
     private String imagem;
 
     @Column(nullable = false)
-    private double preco;
+    private BigDecimal preco;
     
     @Column(nullable = false)
     private String descricao;
