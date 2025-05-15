@@ -79,4 +79,32 @@ public class PedidoService {
             .map(pedido -> modelMapper.map(pedido, PedidoResponseDTO.class))
             .collect(Collectors.toList());
     }
+
+    @Transactional
+    public PedidoResponseDTO alterarStatus(long id, Status status){
+        Pedido pedido = pedidoRepository.findById(id).orElseThrow(() -> new RuntimeException("Pedido não encontrado!"));
+        pedido.setStatus(status);
+
+        pedidoRepository.save(pedido);
+
+        return modelMapper.map(pedido, PedidoResponseDTO.class);
+    }
+
+    public List<PedidoResponseDTO> buscarPedidos(){
+        List<Pedido> pedidos = pedidoRepository.findAll();
+
+        return pedidos.stream()
+        .map(pedido -> modelMapper.map(pedidos, PedidoResponseDTO.class))
+        .collect(Collectors.toList());
+    }
+
+    public List<PedidoResponseDTO> pedidoPorStatus(List<Status> statusList){
+        if(statusList != null && !statusList.isEmpty()){
+            return pedidoRepository.findByStatusIn(statusList).stream()
+                .map(pedido -> modelMapper.map(pedido, PedidoResponseDTO.class))
+                .collect(Collectors.toList());
+        }else{
+            return buscarPedidos();
+        }
+    }
 }
