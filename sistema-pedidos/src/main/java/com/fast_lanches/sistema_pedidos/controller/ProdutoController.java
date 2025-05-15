@@ -26,8 +26,8 @@ public class ProdutoController {
 
     @PostMapping("/criarProduto")
     public ResponseEntity<ProdutoResponseDTO> criarProduto(@RequestBody ProdutoRequestDTO produtoDto){
-        ProdutoResponseDTO produtoDTOcriado = produtoService.criaProduto(produtoDto);
-        return ResponseEntity.status(201).body(produtoDTOcriado);
+        ProdutoResponseDTO produtoCriado = produtoService.criaProduto(produtoDto);
+        return ResponseEntity.status(201).body(produtoCriado);
     }
 
     @DeleteMapping("/excluirProduto/{id}")
@@ -38,19 +38,19 @@ public class ProdutoController {
 
     @GetMapping("/buscarProdutos")
     public ResponseEntity<List<ProdutoResponseDTO>> buscarProdutos(){
-        List<ProdutoResponseDTO> produtosResponseDTO = produtoService.listarProdutos();
-        return ResponseEntity.ok(produtosResponseDTO);
+        List<ProdutoResponseDTO> produtosBuscados = produtoService.listarProdutos();
+        return ResponseEntity.ok(produtosBuscados);
     }
 
     @GetMapping("/buscarPorId/{id}")
     public ResponseEntity<ProdutoResponseDTO> buscarProdutos(@PathVariable long id){
-        ProdutoResponseDTO produtoResponseDTO = produtoService.buscarProduto(id);
-        return ResponseEntity.ok(produtoResponseDTO);
+        ProdutoResponseDTO produtoBuscado = produtoService.buscarProduto(id);
+        return ResponseEntity.ok(produtoBuscado);
     }
 
     @PutMapping("/editarProduto/{id}")
     public ResponseEntity<ProdutoResponseDTO> editarProduto(@PathVariable long id, @RequestBody ProdutoRequestDTO produtoRequestDTO){
-        ProdutoResponseDTO produtoResponseDTO = produtoService.editarProduto(id, produtoRequestDTO);
-        return ResponseEntity.ok(produtoResponseDTO);
+        ProdutoResponseDTO produtoEditado = produtoService.editarProduto(id, produtoRequestDTO);
+        return ResponseEntity.ok(produtoEditado);
     }
 }

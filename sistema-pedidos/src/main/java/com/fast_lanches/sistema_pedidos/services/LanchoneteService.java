@@ -50,4 +50,24 @@ public class LanchoneteService {
             .map(lanchonete -> modelMapper.map(lanchonete, LanchoneteResponseDTO.class))
             .collect(Collectors.toList());
     } 
+
+    @Transactional
+    public void excluirLanchonente(long id){
+        if (!lanchonenteRepository.existsById(id)){
+            throw new RuntimeException("Lanchonente não encontrada!");
+        }
+        lanchonenteRepository.deleteById(id);
+    }
+
+    @Transactional
+    public LanchoneteResponseDTO editarLanchonete(long id, LanchoneteRequestDTO lanchoneteRequestDTO){
+        Lanchonete lanchoneteEditar = lanchonenteRepository.findById(id).orElseThrow(()-> new RuntimeException("Lanchonete não encontrada!"));
+
+        lanchoneteEditar.setNome(lanchoneteRequestDTO.getNome());
+        lanchoneteEditar.setDescricao(lanchoneteRequestDTO.getDescricao());
+
+        lanchonenteRepository.save(lanchoneteEditar);
+
+        return modelMapper.map(lanchoneteEditar, LanchoneteResponseDTO.class);
+    }
 }

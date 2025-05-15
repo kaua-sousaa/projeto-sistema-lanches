@@ -28,14 +28,14 @@ public class UsuarioController {
 
     @PostMapping("/criarUsuario")
     public ResponseEntity<UsuarioResponseDTO> criarUsuario(@RequestBody UsuarioRequestDTO usuarioDTO){
-        UsuarioResponseDTO usuarioDTOCriado = usuarioService.criarUsuario(usuarioDTO);
-        return ResponseEntity.status(201).body(usuarioDTOCriado);
+        UsuarioResponseDTO usuarioCriado = usuarioService.criarUsuario(usuarioDTO);
+        return ResponseEntity.status(201).body(usuarioCriado);
     }
 
     @GetMapping("/listarUsuarios")
     public ResponseEntity<List<UsuarioResponseDTO>> listarUsuarios(){
-        List<UsuarioResponseDTO> usuariosDto = usuarioService.listarUsuarios();
-        return ResponseEntity.ok(usuariosDto);
+        List<UsuarioResponseDTO> usuariosListados = usuarioService.listarUsuarios();
+        return ResponseEntity.ok(usuariosListados);
     }
 
     @DeleteMapping("/excluirUsuario/{id}")
@@ -46,7 +46,7 @@ public class UsuarioController {
 
     @PutMapping("/editarUsuario/{id}")
     public ResponseEntity<UsuarioResponseDTO> editarUsuario(@PathVariable long id, @RequestBody UsuarioRequestDTO usuarioRequestDTO){
-        UsuarioResponseDTO usuarioResponseDTO = usuarioService.editarUsuario(id, usuarioRequestDTO);
-        return ResponseEntity.ok(usuarioResponseDTO);
+        UsuarioResponseDTO usuarioEditado = usuarioService.editarUsuario(id, usuarioRequestDTO);
+        return ResponseEntity.ok(usuarioEditado);
     }
 }
