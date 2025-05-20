@@ -90,13 +90,6 @@ public class PedidoService {
         return modelMapper.map(pedido, PedidoResponseDTO.class);
     }
 
-    public List<PedidoResponseDTO> buscarPedidos(){
-        List<Pedido> pedidos = pedidoRepository.findAll();
-
-        return pedidos.stream()
-        .map(pedido -> modelMapper.map(pedidos, PedidoResponseDTO.class))
-        .collect(Collectors.toList());
-    }
 
     public List<PedidoResponseDTO> pedidoPorStatus(List<Status> statusList){
         if(statusList != null && !statusList.isEmpty()){
@@ -104,7 +97,7 @@ public class PedidoService {
                 .map(pedido -> modelMapper.map(pedido, PedidoResponseDTO.class))
                 .collect(Collectors.toList());
         }else{
-            return buscarPedidos();
+            return listarPedidos();
         }
     }
 }
