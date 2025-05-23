@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.fast_lanches.sistema_pedidos.dto.UsuarioRequestDTO;
@@ -23,6 +24,9 @@ public class UsuarioService {
     @Autowired
     private ModelMapper modelMapper;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Transactional
     public UsuarioResponseDTO criarUsuario(UsuarioRequestDTO usuarioDto){
         //verificar email
@@ -34,7 +38,7 @@ public class UsuarioService {
         usuario.setNome(usuarioDto.getNome());
         usuario.setEmail(usuarioDto.getEmail());
         usuario.setDataNascimento((usuarioDto.getDataNascimento()));
-        usuario.setSenha(usuarioDto.getSenha());
+        usuario.setSenha(passwordEncoder.encode(usuarioDto.getSenha()));
         usuario.setTipo(usuarioDto.getTipo());
 
         Usuario usuarioSalvo = usuarioRepository.save(usuario);
