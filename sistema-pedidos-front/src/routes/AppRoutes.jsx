@@ -2,6 +2,7 @@
 import { Route, Routes } from "react-router-dom";
 import CadastroPage from "../pages/CadastroPage"
 import LoginPage from "../pages/LoginPage"
+import LoginForm from "../components/forms/LoginForm";
 
 const AppRoutes = () => {
     return(
