@@ -71,8 +71,8 @@ const CadastroUsuarioForm = ({ onSubmit, isLoading }) =>{
                 required
                 disabled={isLoading}
             />
-            <div>
-                <label htmlFor="tipo" className="block text-sm font-medium text-gray-700 mb-1">
+            <div >
+                <label htmlFor="tipo" className="block text-sm font-medium text-white mb-1">
                     Tipo de Usuário
                 </label>
                 <select
@@ -81,7 +81,8 @@ const CadastroUsuarioForm = ({ onSubmit, isLoading }) =>{
                     value={formData.tipo}
                     onChange={handleChange}
                     disabled={isLoading}
-                    className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md disabled:bg-gray-100"
+                    className="mt-1 block w-full pl-3 pr-10 py-2 text-base bg-white border-gray-300 focus:outline-none
+                     sm:text-sm rounded-md"
                 >
                     {TIPOS_USUARIO.map(tipoOpt => (
                         <option key={tipoOpt.value} value={tipoOpt.value}>

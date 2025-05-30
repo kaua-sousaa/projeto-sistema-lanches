@@ -13,7 +13,7 @@ const Button = ({children,type = 'button',onClick,disabled = false,isLoading = f
             break;
         case 'primary': 
         default:
-            variantStyle = 'text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500';
+            variantStyle = 'text-white bg-orange-500 hover:bg-orange-600 focus:ring-indigo-500';
             break;
     }
 

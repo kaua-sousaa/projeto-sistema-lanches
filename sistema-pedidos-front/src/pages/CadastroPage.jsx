@@ -1,12 +1,13 @@
+// src/pages/CadastroPage.jsx
 import React, { useState } from 'react';
 import CadastroUsuarioForm from '../components/forms/CadastroUsuarioForm'; 
-import { registrarUsuario } from '../services/UsuarioService' 
-import { useNavigate } from 'react-router-dom';
+import { registrarUsuario } from '../services/UsuarioService'; 
+import { Link } from 'react-router-dom'; 
 
 const CadastroPage = () => {
     const [feedback, setFeedback] = useState({ message: '', type: '' });
     const [isLoading, setIsLoading] = useState(false);
-    const navigate = useNavigate();
+    
 
     const handleCadastroSubmit = async (formData) => {
         setIsLoading(true);
@@ -18,7 +19,6 @@ const CadastroPage = () => {
                 message: `Usuário "${responseData.nome || formData.nome}" cadastrado com sucesso!`,
                 type: 'success'
             });
-
         } catch (error) {
             setFeedback({
                 message: error.message || 'Falha ao cadastrar usuário. Tente novamente.',
@@ -29,26 +29,29 @@ const CadastroPage = () => {
         }
     };
 
+    // Estilo do card, similar ao da HomePage
+    const cardStyle = "bg-slate-800 bg-opacity-70 backdrop-filter backdrop-blur-lg p-8 sm:p-10 rounded-xl shadow-2xl";
+    
     const feedbackMessageClasses = `p-4 my-4 rounded-md text-sm ${
-        feedback.type === 'success' ? 'bg-green-100 text-green-700' :
-        feedback.type === 'error'   ? 'bg-red-100 text-red-700' :
+        feedback.type === 'success' ? 'bg-green-500 bg-opacity-80 text-white' :
+        feedback.type === 'error'   ? 'bg-red-500 bg-opacity-80 text-white' :
         'hidden'
     }`;
 
     return (
-        <div className="min-h-screen bg-gray-100 flex flex-col justify-center items-center py-12 px-4 sm:px-6 lg:px-8">
+        <div className="min-h-screen bg-gradient-to-br from-teal-700 via-cyan-600 to-teal-800 flex flex-col justify-center items-center py-12 px-4 sm:px-6 lg:px-8">
+            
             <div className="w-full max-w-md space-y-8">
                 <div>
-                    {/* <img className="mx-auto h-12 w-auto" src="/your-logo.svg" alt="Workflow" /> */}
-                    <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+                    <h2 className="mt-6 text-center text-3xl font-extrabold text-white">
                         Criar nova conta
                     </h2>
-                    <p className="mt-2 text-center text-sm text-gray-600">
+                    <p className="mt-2 text-center text-sm text-slate-300">
                         Preencha os campos abaixo para se registrar.
                     </p>
                 </div>
 
-                <div className="bg-white py-8 px-6 shadow rounded-lg sm:px-10">
+                <div className={cardStyle}>
                     <CadastroUsuarioForm onSubmit={handleCadastroSubmit} isLoading={isLoading} />
                 </div>
 
@@ -57,11 +60,11 @@ const CadastroPage = () => {
                         {feedback.message}
                     </div>
                 )}
-                <p className='mt-4 text-center text-sm'>
-                    Já possuí uma conta ?{' '}
-                    <a href="/login-page" onClick={(e) => {e.preventDefault(); navigate('/login-page')}} className='font-medium text-indigo-600 hover:text-indigo-500 '>
-                         Faça login aqui
-                    </a>
+                <p className='mt-6 text-center text-sm text-white'>
+                    Já possui uma conta?{' '}
+                    <Link to="/login-page" className='font-medium text-orange-400 hover:text-orange-500'>
+                        Faça login aqui
+                    </Link>
                 </p>
             </div>
         </div>
