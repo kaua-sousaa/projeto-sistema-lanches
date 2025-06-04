@@ -43,12 +43,12 @@ public class AuthController {
             CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
             TipoUsuario tipoUsuario = userDetails.getTipoUsuarioEnum();
             String email = userDetails.getUsername();
-            
+            String nome = userDetails.getNomeCompleto();
             List<String> roles = userDetails.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList());
             
-            return ResponseEntity.ok(new LoginResponseDTO("Login bem sucedido!", email, tipoUsuario, roles));
+            return ResponseEntity.ok(new LoginResponseDTO("Login bem sucedido!", email,nome, tipoUsuario, roles));
         } catch (BadCredentialsException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("ERRO: email ou senha inválidos.");
         }

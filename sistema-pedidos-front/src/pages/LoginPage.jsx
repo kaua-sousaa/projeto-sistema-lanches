@@ -4,11 +4,13 @@ import LoginForm from '../components/forms/LoginForm';
 import { loginUsuario } from '../services/AuthService';
 import { useNavigate } from 'react-router-dom'; 
 import { Link } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 
 const LoginPage = () => {
     const [feedback, setFeedback] = useState({ message: '', type: '' }); 
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
+    const { login } = useAuth();
 
     const handleLoginSubmit = async (credentials) => {
         setIsLoading(true);
@@ -16,6 +18,9 @@ const LoginPage = () => {
 
         try {
             const responseData = await loginUsuario(credentials);
+
+            login(responseData);
+            
             setFeedback({
                 message: 'Login realizado com sucesso! Redirecionando...',
                 type: 'success'

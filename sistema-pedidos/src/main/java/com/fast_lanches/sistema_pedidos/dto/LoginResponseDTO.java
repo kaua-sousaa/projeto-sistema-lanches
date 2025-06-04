@@ -14,6 +14,7 @@ import lombok.Setter;
 public class LoginResponseDTO {
     private String mensagem;
     private String email;
+    private String nome;
     private TipoUsuario tipoUsuario;
     private List<String> roles;
 }
