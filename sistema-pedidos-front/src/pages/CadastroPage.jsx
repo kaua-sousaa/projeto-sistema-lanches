@@ -39,9 +39,10 @@ const CadastroPage = () => {
     }`;
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-teal-700 via-cyan-600 to-teal-800 flex flex-col justify-center items-center py-12 px-4 sm:px-6 lg:px-8">
+        //uso do calc é para garantir que o fundo ocupe toda a altura da tela, menos o cabeçalho
+        <div className="min-h-[calc(100vh-7rem)] bg-gradient-to-br from-teal-700 via-cyan-600 to-teal-800 flex flex-col justify-center items-center py-12 px-4 sm:px-6 lg:px-8">
             
-            <div className="w-full max-w-md space-y-8">
+            <div className="w-full max-w-md space-y-7">
                 <div>
                     <h2 className="mt-6 text-center text-3xl font-extrabold text-white">
                         Criar nova conta

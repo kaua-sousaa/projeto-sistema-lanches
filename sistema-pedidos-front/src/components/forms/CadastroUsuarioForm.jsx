@@ -90,6 +90,13 @@ const CadastroUsuarioForm = ({ onSubmit, isLoading }) =>{
                         </option>
                     ))}
                 </select>
+                {
+                    formData.tipo === TIPOS_USUARIO[1].value && (
+                        <p className="text-sm text-gray-300 mt-1 text-center">
+                            Ao selecionar: "{TIPOS_USUARIO[1].label}", você só terá o acesso ao restaurante após o dono concedê-la.
+                        </p>
+                    )
+                }
             </div>
             <Button type="submit" isLoading={isLoading} disabled={isLoading} fullWidth>
                 Cadastrar

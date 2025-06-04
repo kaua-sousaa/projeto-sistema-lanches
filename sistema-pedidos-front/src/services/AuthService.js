@@ -1,13 +1,13 @@
 const API_BASE_URL = 'http://localhost:8080';
 
-export const loginUsuario = async (email, senha) => {
+export const loginUsuario = async (credentials) => {
     try {
-        const response = await fetch(`${API_BASE_URL}/usuario/login`, {
+        const response = await fetch(`${API_BASE_URL}/auth/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ email, senha }),
+            body: JSON.stringify(credentials),
         });
 
         const data = await response.json();

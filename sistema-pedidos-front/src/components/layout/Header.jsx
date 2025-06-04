@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import logo from '../../assets/logo.png'; 
+import { CgProfile } from 'react-icons/cg';
 
 const Header = () => {
     const navLinkClass = "text-slate-100 hover:text-orange-400 px-3 py-2 rounded-md text-sm font-medium transition-colors";
@@ -22,7 +23,7 @@ const Header = () => {
                     </div>
 
                     <div className="hidden md:block">
-                        <div className="ml-10 flex items-baseline space-x-4">
+                        <div className="ml-10 flex space-x-4 items-center">
                             <NavLink 
                                 to="/" 
                                 className={({ isActive }) => `${navLinkClass} ${isActive ? activeNavLinkClass : ''}`}
@@ -30,21 +31,22 @@ const Header = () => {
                                 Home
                             </NavLink>
                             <NavLink 
-                                to="/cadastro" 
-                                className={({ isActive }) => `${navLinkClass} ${isActive ? activeNavLinkClass : ''}`}
-                            >
-                                Cadastre-se
-                            </NavLink>
-                            <NavLink 
                                 to="/login-page"
                                 className={({ isActive }) => `${navLinkClass} ${isActive ? activeNavLinkClass : ''}`}
                             >
                                 Login
                             </NavLink>
-                            {/* Futuramente, para links de usuário logado:
-                            <NavLink to="/dashboard" className={({ isActive }) => `${navLinkClass} ${isActive ? activeNavLinkClass : ''}`}>Meu Painel</NavLink>
-                            <button onClick={handleLogout} className={navLinkClass}>Sair</button> 
-                            */}
+                            <NavLink 
+                                to="/cadastro" 
+                                className={({ isActive }) => `${navLinkClass} ${isActive ? activeNavLinkClass : ''}`}
+                            >
+                                Cadastre-se
+                            </NavLink>
+                            <CgProfile className="text-white" ></CgProfile>
+                            {
+                                
+                            }
+                            
                         </div>
                     </div>
                 </div>
