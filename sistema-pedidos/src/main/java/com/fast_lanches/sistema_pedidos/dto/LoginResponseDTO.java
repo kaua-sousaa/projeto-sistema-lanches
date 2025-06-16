@@ -15,6 +15,7 @@ public class LoginResponseDTO {
     private String mensagem;
     private String email;
     private String nome;
+    private String token;
     private TipoUsuario tipoUsuario;
     private List<String> roles;
 }

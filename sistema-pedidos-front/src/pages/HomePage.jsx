@@ -16,7 +16,6 @@ const HomePage = () =>{
         navigate('/login-page');
     };
 
-    // Novo estilo de card: um cinza escuro semi-transparente para bom contraste de texto
     const cardStyle = "bg-slate-800 bg-opacity-60 backdrop-filter backdrop-blur-lg p-6 md:p-8 rounded-xl shadow-xl hover:shadow-2xl transition-shadow duration-300";
 
     return (
@@ -33,13 +32,13 @@ const HomePage = () =>{
                     <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
                         <Button
                             onClick={handleCadastroClick}
-                            className="bg-orange-500 text-white hover:bg-orange-600 shadow-lg px-8 py-3 text-lg font-semibold rounded-lg w-full sm:w-auto"
+                            className="bg-orange-500 text-white hover:bg-orange-600 shadow-lg px-8 py-3 text-lg font-semibold rounded-lg w-full sm:w-auto cursor-pointer"
                         >
                             Crie seu Cardápio Grátis
                         </Button>
                         <Button
                             onClick={handleLoginClick}
-                            className="bg-transparent border-2 border-orange-400 text-orange-300 hover:bg-orange-400 hover:text-white shadow-lg px-8 py-3 text-lg font-semibold rounded-lg w-full sm:w-auto"
+                            className="bg-transparent border-2 border-orange-400 text-orange-300 hover:bg-orange-400 hover:text-white shadow-lg px-8 py-3 text-lg font-semibold rounded-lg w-full sm:w-auto cursor-pointer "
                         >
                             Já Tenho Conta
                         </Button>
@@ -91,7 +90,7 @@ const HomePage = () =>{
                                 "A plataforma é incrível! Consegui colocar meu cardápio no ar em menos de uma hora e meus clientes adoraram a novidade. Super prático!"
                             </p>
                             <div className="flex items-center">
-                                <FiThumbsUp className="text-2xl text-green-400 mr-3" /> {/* Verde para feedback positivo */}
+                                <FiThumbsUp className="text-2xl text-green-400 mr-3" /> 
                                 <div>
                                     <p className="font-semibold text-white">Mariana Costa</p>
                                     <p className="text-xs text-teal-300">Chef da Cantina da Praça</p>

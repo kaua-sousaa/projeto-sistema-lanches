@@ -6,11 +6,11 @@ import Button from '../comum/Button';
 
 const CadastroUsuarioForm = ({ onSubmit, isLoading }) =>{
     const [formData, setFormData] = useState({
-        nome: '',
-        email: '',
-        senha: '',
-        dataNascimento: '',
-        tipo: TIPOS_USUARIO[0]?.value || 'DONO_LANCHONETE',
+        nome: 'kaua',
+        email: 'kaua@gmail.com',
+        senha: '123',
+        dataNascimento: '2000-01-01',
+        tipo: TIPOS_USUARIO[0]?.value || 'DONO',
     });
 
     const handleChange = (e) => {

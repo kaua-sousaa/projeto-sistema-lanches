@@ -4,7 +4,7 @@ import Button from '../comum/Button';
 
 
 const LoginForm = ({ onSubmit, isLoading }) => { 
-    const [credentials, setCredentials] = useState({ email: '', senha: '' });
+    const [credentials, setCredentials] = useState({ email: 'kaua@gmail.com', senha: '123' });
 
     const handleChange = (e) => {
         const { name, value } = e.target;

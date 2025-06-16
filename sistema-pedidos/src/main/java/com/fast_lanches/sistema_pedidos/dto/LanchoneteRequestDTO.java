@@ -1,6 +1,5 @@
 package com.fast_lanches.sistema_pedidos.dto;
 
-import java.time.LocalDate;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,6 +14,4 @@ public class LanchoneteRequestDTO {
     private long id;
     private String nome;
     private String descricao;
-    private LocalDate dataDeCriacao;
-    private long usuarioId;
 }

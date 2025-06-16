@@ -1,10 +1,13 @@
 package com.fast_lanches.sistema_pedidos.services;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 import com.fast_lanches.sistema_pedidos.dto.LanchoneteRequestDTO;
@@ -29,13 +32,13 @@ public class LanchoneteService {
     private ModelMapper modelMapper;
 
     @Transactional
-    public LanchoneteResponseDTO criarLanchonete(LanchoneteRequestDTO lanchoneteDto){
-        Usuario usuario = usuarioRepository.findById(lanchoneteDto.getUsuarioId()).orElseThrow(() -> new RuntimeException("Usuario nao encontrado"));
+    public LanchoneteResponseDTO criarLanchonete(LanchoneteRequestDTO lanchoneteDto, long donoId) {
+        Usuario usuario = usuarioRepository.findById(donoId).orElseThrow(() -> new RuntimeException("Usuario nao encontrado"));
 
         Lanchonete lanchonete = new Lanchonete();
         lanchonete.setNome(lanchoneteDto.getNome());
         lanchonete.setDescricao(lanchoneteDto.getDescricao());
-        lanchonete.setDataDeCriacao(lanchoneteDto.getDataDeCriacao());
+        lanchonete.setDataDeCriacao(LocalDate.now());
         lanchonete.setUsuario(usuario);
 
         Lanchonete lanchoneteSalva = lanchonenteRepository.save(lanchonete);
@@ -49,6 +52,13 @@ public class LanchoneteService {
         return lanchonetes.stream()
             .map(lanchonete -> modelMapper.map(lanchonete, LanchoneteResponseDTO.class))
             .collect(Collectors.toList());
+    } 
+
+    public Optional <LanchoneteResponseDTO> minhaLanchonete(long DonoId){
+        Optional<Lanchonete> lanchonete = lanchonenteRepository.findByUsuarioId(DonoId);
+        
+        return lanchonete.map(lanchoneteEncontrada -> 
+            modelMapper.map(lanchonete, LanchoneteResponseDTO.class));
     } 
 
     @Transactional

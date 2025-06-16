@@ -17,8 +17,6 @@ const Header = () => {
         setProfileDropDown(false);
         navigate('/');
     }
-    console.log("autenticado", isAuthenticated);
-    console.log("usuarioAtual", usuarioAtual);
 
     useEffect(() => {
         const handleClickFora = (event) => {
@@ -91,7 +89,7 @@ const Header = () => {
                                             {/* Se o usuário for DONO_LANCHONETE, mostrar "Minha Lanchonete" */}
                                             {
                                             usuarioAtual && usuarioAtual.tipo === 'DONO' && (
-                                                <NavLink to="/minha-lanchonete" className="flex items-center gap-2 px-4 py-2 text-sm text-slate-100 hover:bg-slate-600 hover:text-orange-300 w-full text-left" role="menuitem" onClick={() => setProfileDropDown(false)}>
+                                                <NavLink to="/dashboard" className="flex items-center gap-2 px-4 py-2 text-sm text-slate-100 hover:bg-slate-600 hover:text-orange-300 w-full text-left" role="menuitem" onClick={() => setProfileDropDown(false)}>
                                                    <FiBriefcase /> Minha Lanchonete
                                                 </NavLink>
                                             )}
